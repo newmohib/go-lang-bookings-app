@@ -4,15 +4,16 @@
 <!-- Content Section -->
 <div class="container mt-5">
   <div class="row justify-content-center align-items-center mt-3">
-    <h1 class="text-center">Search for Availability</h1>
+    <h1 class="text-center">Search for Availability 2</h1>
   </div>
 
   <form
-    action="reservation.html"
-    method="get"
+    action="/search-availability"
+    method="post"
     class="needs-validation"
     novalidate
   >
+    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
     <div
       id="reservationDate"
       class="row justify-content-center align-items-center"
