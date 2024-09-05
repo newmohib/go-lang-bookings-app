@@ -11,6 +11,15 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker.min.css"
+    />
+
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs5.min.css"
+    /> -->
   </head>
 
   <body>
@@ -89,33 +98,35 @@
         <h1 class="text-center">Search for Availability</h1>
       </div>
 
-      <form action="reservation.html" method="get">
-        <div class="row justify-content-center align-items-center">
+      <form
+        action="reservation.html"
+        method="get"
+        class="needs-validation"
+        novalidate
+      >
+        <div
+          id="reservationDate"
+          class="row justify-content-center align-items-center"
+        >
           <div class="col-3">
             <input
-              name="start_date"
-              type="date"
+              name="start"
+              type="text"
               class="form-control"
-              id="start_date"
-              aria-describedby="start_date_help"
+              id="start"
               required
+              placeholder="Arrival"
             />
-            <div id="end_date_help" class="form-text">
-              Enter your End date in the form of MM-DD-YYYY
-            </div>
           </div>
           <div class="col-3">
             <input
-              name="end_date"
-              type="date"
+              name="end"
+              type="text"
               class="form-control"
-              id="end_date"
-              aria-describedby="start_date_help"
+              id="end"
               required
+              placeholder="Departure"
             />
-            <div id="end_date_help" class="form-text">
-              Enter your ending date in the form of MM-DD-YYYY
-            </div>
           </div>
           <div class="row justify-content-center align-items-center">
             <div class="col-6 mt-3">
@@ -126,40 +137,6 @@
           </div>
         </div>
       </form>
-
-      <!-- <div class="row">
-        <div class="col-md-12">
-          <form action="reservation.html" method="get">
-            <div class="form-group">
-              <label for="start_date" class="form-label">Starting Date</label>
-              <input
-                name="start_date"
-                type="date"
-                class="form-control"
-                id="start_date"
-                aria-describedby="start_date_help"
-              />
-              <div id="end_date_help" class="form-text">
-                Enter your End date in the form of MM-DD-YYYY
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="end_date" class="form-label">Ending Date</label>
-              <input
-                name="end_date"
-                type="date"
-                class="form-control"
-                id="end_date"
-                aria-describedby="start_date_help"
-              />
-              <div id="end_date_help" class="form-text">
-                Enter your ending date in the form of MM-DD-YYYY
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-        </div>
-      </div> -->
     </div>
 
     <!-- Footer -->
@@ -205,5 +182,41 @@
       integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
       crossorigin="anonymous"
     ></script>
+
+    <!-- for date ficker -->
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script>
+
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (() => {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+
+      // date ficker js
+      const elem = document.getElementById("reservationDate");
+      const rangepicker = new DateRangePicker(elem, {
+        format: "yyyy-mm-dd",
+      });
+      console.log({ rangepicker });
+    </script>
   </body>
 </html>
