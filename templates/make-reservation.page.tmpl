@@ -1,0 +1,38 @@
+{{template "base" .}}
+
+{{define "content"}}
+
+<!-- Content Section -->
+<div class="container mt-5">
+  <div class="row justify-content-center align-items-center mt-3">
+    <h1 class="text-center">Make Reservation</h1>
+  </div>
+
+  <form
+    action="make-reservation.html"
+    method="post"
+    class="needs-validation"
+    novalidate
+  >
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name:</label>
+      <input name="firstName" type="text" class="form-control" id="firstName" />
+    </div>
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name:</label>
+      <input name="lastName" type="text" class="form-control" id="lastName" />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input name="email" type="email" class="form-control" id="email" />
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone:</label>
+      <input name="phone" type="phone" class="form-control" id="phone" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Make Reservation</button>
+  </form>
+</div>
+
+{{ end }}

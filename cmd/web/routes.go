@@ -34,7 +34,13 @@ func routes(app *config.AppConfig) http.Handler {
 	// router
 	mux.Get("/", handlers.Repo.Home)
 	mux.Get("/about", handlers.Repo.About)
+	mux.Get("/generals-quarters", handlers.Repo.Generals)
+	mux.Get("/majors-suite", handlers.Repo.Majors)
+	mux.Get("/search-availability", handlers.Repo.SearchAvailability)
+	mux.Get("/contact", handlers.Repo.Contact)
+	mux.Get("/make-reservation", handlers.Repo.Reservation)
 
+	// static files config
 	fileServer := http.FileServer(http.Dir("./static/"))
 	// fmt.Println("File Server path: ", fileServer)
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))

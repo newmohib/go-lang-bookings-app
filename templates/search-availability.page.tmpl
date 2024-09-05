@@ -1,0 +1,51 @@
+{{template "base" .}}
+
+{{define "content"}}
+<!-- Content Section -->
+<div class="container mt-5">
+  <div class="row justify-content-center align-items-center mt-3">
+    <h1 class="text-center">Search for Availability</h1>
+  </div>
+
+  <form
+    action="reservation.html"
+    method="get"
+    class="needs-validation"
+    novalidate
+  >
+    <div
+      id="reservationDate"
+      class="row justify-content-center align-items-center"
+    >
+      <div class="col-3">
+        <input
+          name="start"
+          type="text"
+          class="form-control"
+          id="start"
+          required
+          placeholder="Arrival"
+        />
+      </div>
+      <div class="col-3">
+        <input
+          name="end"
+          type="text"
+          class="form-control"
+          id="end"
+          required
+          placeholder="Departure"
+        />
+      </div>
+      <div class="row justify-content-center align-items-center">
+        <div class="col-6 mt-3">
+          <button type="submit" class="btn btn-primary">
+            Search Availability
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+{{ end }}

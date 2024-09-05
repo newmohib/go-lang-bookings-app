@@ -1,0 +1,55 @@
+{{template "base" .}}
+
+{{define "content"}}
+
+<!-- Content Section -->
+<div class="container mt-5">
+  <div class="row justify-content-md-center">
+    <div class="col-6">
+      <img
+        src="/static/images/house-2.jpg"
+        alt="generals-quarters"
+        class="img-fluid img-thumbnail mx-auto d-block"
+      />
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center mt-3">
+    <h1 class="text-center">General's Quarters</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Feature One</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+        erat a ante.
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h3>Feature Two</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+        erat a ante.
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h3>Feature Three</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+        erat a ante.
+      </p>
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <div class="text-center">
+      <button class="btn btn-primary" onclick="openForm()">
+        Check Availability
+      </button>
+      <!-- <a href="/make-reservation-gq" type="button" class="btn btn-success"
+          >Check Availability</a
+        > -->
+    </div>
+  </div>
+</div>
+
+{{ end }}
