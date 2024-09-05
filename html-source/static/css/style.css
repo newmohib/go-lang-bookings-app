@@ -1,0 +1,7 @@
+/* override styles here */
+.notie-container {
+  box-shadow: none;
+}
+.datepicker-dropdown {
+  z-index: 10000;
+}
