@@ -266,11 +266,9 @@
             focusConfirm: false,
             showCancelButton: true,
             willOpen: () => {
-              const elem = document.getElementById("reservationDateModal");
-              const rp = new DateRangePicker(elem, {
-                format: "yyyy-mm-dd",
-                showOnFocus: true,
-              });
+              if (c.willOpen !== undefined) {
+                c.willOpen();
+              }
             },
 
             preConfirm: () => {
@@ -280,15 +278,16 @@
               ];
             },
             didOpen: () => {
-              document.getElementById("start").removeAttribute("disabled");
-              document.getElementById("end").removeAttribute("disabled");
+              if (c.didOpen !== undefined) {
+                c.didOpen();
+              }
             },
           });
           // if (formValues) {
           //   Swal.fire(JSON.stringify(formValues));
           // }
           console.log({ result, dismiss, isConfirmed, isDenied });
-          //debugger;
+
           if (result) {
             if (dismiss !== "cancel" && isConfirmed) {
               if (result && result.length > 0) {
@@ -328,6 +327,7 @@
       method="post"
       class="needs-validation"
       novalidate
+      id="availabilityForm"
     >
       <div
         id="reservationDateModal"
@@ -360,24 +360,32 @@
     </form>
       
       `;
-        // <div class="row justify-content-center align-items-center">
-        //     <div class="col-6 mt-3">
-        //       <button type="submit" class="btn btn-primary">
-        //         Search Availability
-        //       </button>
-        //     </div>
-        //   </div>
 
         attention.custom({
           msg: myForm,
           title: "Choose your dates",
           callback: async (result) => {
+            const form = document.getElementById("availabilityForm");
+            const formData = new FormData(form);
+            formData.append("csrf_token", "{{.CSRFToken}}");
             console.log({ result });
             const response = await fetch("/search-availability-json", {
-              method: "GET",
+              method: "post",
+              body: formData,
             });
             const data = await response.json();
             console.log({ data });
+          },
+          willOpen: () => {
+            const elem = document.getElementById("reservationDateModal");
+            const rp = new DateRangePicker(elem, {
+              format: "yyyy-mm-dd",
+              showOnFocus: true,
+            });
+          },
+          didOpen: () => {
+            document.getElementById("start").removeAttribute("disabled");
+            document.getElementById("end").removeAttribute("disabled");
           },
         });
       };
