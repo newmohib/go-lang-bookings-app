@@ -181,7 +181,7 @@
 
       // date ficker js
       const elem = document.getElementById("reservationDate");
-      
+
       if (elem) {
         const rangepicker = new DateRangePicker(elem, {
           format: "yyyy-mm-dd",
@@ -254,7 +254,12 @@
 
         const custom = async (c) => {
           const { msg = "", title = "" } = c;
-          const { value: formValues } = await Swal.fire({
+          const {
+            value: result,
+            dismiss,
+            isConfirmed,
+            isDenied,
+          } = await Swal.fire({
             title: title,
             html: msg,
             backdrop: false,
@@ -270,17 +275,34 @@
 
             preConfirm: () => {
               return [
-                document.getElementById("startModal").value,
-                document.getElementById("endModal").value,
+                document.getElementById("start").value,
+                document.getElementById("end").value,
               ];
             },
             didOpen: () => {
-              document.getElementById("startModal").removeAttribute("disabled");
-              document.getElementById("endModal").removeAttribute("disabled");
+              document.getElementById("start").removeAttribute("disabled");
+              document.getElementById("end").removeAttribute("disabled");
             },
           });
-          if (formValues) {
-            Swal.fire(JSON.stringify(formValues));
+          // if (formValues) {
+          //   Swal.fire(JSON.stringify(formValues));
+          // }
+          console.log({ result, dismiss, isConfirmed, isDenied });
+          //debugger;
+          if (result) {
+            if (dismiss !== "cancel" && isConfirmed) {
+              if (result && result.length > 0) {
+                console.log(result);
+                if (c.callback !== undefined) {
+                  c.callback(result);
+                  return;
+                }
+              } else {
+                c.callback(false);
+              }
+            } else {
+              c.callback(false);
+            }
           }
         };
 
@@ -302,8 +324,8 @@
       const openForm = () => {
         const myForm = `
       <form
-      action="reservation.html"
-      method="get"
+      action="/search-availability"
+      method="post"
       class="needs-validation"
       novalidate
     >
@@ -313,10 +335,10 @@
       >
         <div class="col-6">
           <input
-            name="startModal"
+            name="start"
             type="text"
             class="form-control"
-            id="startModal"
+            id="start"
             required
             placeholder="Arrival"
             disabled
@@ -324,10 +346,10 @@
         </div>
         <div class="col-6">
           <input
-            name="endModal"
+            name="end"
             type="text"
             class="form-control"
-            id="endModal"
+            id="end"
             required
             placeholder="Departure"
             disabled
@@ -349,6 +371,14 @@
         attention.custom({
           msg: myForm,
           title: "Choose your dates",
+          callback: async (result) => {
+            console.log({ result });
+            const response = await fetch("/search-availability-json", {
+              method: "GET",
+            });
+            const data = await response.json();
+            console.log({ data });
+          },
         });
       };
     </script>
