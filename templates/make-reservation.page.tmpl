@@ -7,52 +7,56 @@
   <div class="row justify-content-center align-items-center mt-3">
     <h1 class="text-center">Make Reservation</h1>
   </div>
+  {{$res := index .Data "reservation"}}
+
   <!-- needs-validation -->
   <form action="/make-reservation" method="post" class="g-3" novalidate>
     <input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
 
     <div class="mb-3">
       <label for="firstName" class="form-label">First Name:</label>
+
       <input name="firstName" type="text" class="form-control
-      {{with .Form.Errors.Get "first_name"}} is-invalid {{ end }}"
-      id="firstName" />
-      {{with .Form.Errors.Get "first_name"}}
+      {{with .Form.Errors.Get "firstName"}} is-invalid {{ end }}" id="firstName"
+      value="{{ $res.FirstName }}" />
+      {{with .Form.Errors.Get "firstName"}}
+
       <div class="text-danger">{{.}}</div>
 
       {{ end }}
     </div>
     <div class="mb-3">
       <label for="lastName" class="form-label">Last Name:</label>
-      <input
-        name="lastName"
-        type="text"
-        class="form-control"
-        id="lastName"
-        required
-      />
-      <div class="invalid-feedback">Please provide a valid Last Name.</div>
+      <input name="lastName" type="text" class="form-control
+      {{with .Form.Errors.Get "lastName"}} is-invalid {{ end }}" id="lastName"
+      required value="{{ $res.LastName }}" />
+      {{with .Form.Errors.Get "lastName"}}
+
+      <div class="text-danger">{{.}}</div>
+
+      {{ end }}
     </div>
     <div class="mb-3">
       <label for="email" class="form-label">Email:</label>
-      <input
-        name="email"
-        type="email"
-        class="form-control"
-        id="email"
-        required
-      />
+      <input name="email" type="email" class="form-control
+      {{with .Form.Errors.Get "email"}} is-invalid {{ end }}" id="email"
+      required value="{{ $res.Email }}" />
     </div>
-    <div class="invalid-feedback">Please provide a valid Eamil.</div>
+    {{with .Form.Errors.Get "email"}}
+
+    <div class="text-danger">{{.}}</div>
+
+    {{ end }}
     <div class="mb-3">
       <label for="phone" class="form-label">Phone:</label>
-      <input
-        name="phone"
-        type="phone"
-        class="form-control"
-        id="phone"
-        required
-      />
-      <div class="invalid-feedback">Please provide a valid Phone Number.</div>
+      <input name="phone" type="phone" class="form-control
+      {{with .Form.Errors.Get "phone"}} is-invalid {{ end }}" id="phone"
+      required value="{{ $res.Phone }}" />
+      {{with .Form.Errors.Get "phone"}}
+
+      <div class="text-danger">{{.}}</div>
+
+      {{ end }}
     </div>
 
     <button class="btn btn-primary" type="submit">Make Reservation</button>
