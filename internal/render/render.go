@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 
 	"github.com/choi2k/nosurf"
-	"github.com/newmohib/go-lang-bookings-app/pkg/config"
-	"github.com/newmohib/go-lang-bookings-app/pkg/models"
+	"github.com/newmohib/go-lang-bookings-app/internal/config"
+	"github.com/newmohib/go-lang-bookings-app/internal/models"
 )
 
 var functions = template.FuncMap{}
@@ -31,7 +31,7 @@ func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateDa
 }
 
 // RenderTemplate render template using html/template
-func RenderTemplate(w http.ResponseWriter,r *http.Request, tmpl string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 	if app.UseCache {
 		// get tehe template cache from the app config

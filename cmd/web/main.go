@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/newmohib/go-lang-bookings-app/pkg/config"
-	"github.com/newmohib/go-lang-bookings-app/pkg/handlers"
-	"github.com/newmohib/go-lang-bookings-app/pkg/render"
+	"github.com/newmohib/go-lang-bookings-app/internal/config"
+	"github.com/newmohib/go-lang-bookings-app/internal/handlers"
+	"github.com/newmohib/go-lang-bookings-app/internal/render"
 )
 
 // application portNumber

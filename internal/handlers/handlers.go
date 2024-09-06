@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/newmohib/go-lang-bookings-app/pkg/config"
-	"github.com/newmohib/go-lang-bookings-app/pkg/models"
-	"github.com/newmohib/go-lang-bookings-app/pkg/render"
+	"github.com/newmohib/go-lang-bookings-app/internal/config"
+	"github.com/newmohib/go-lang-bookings-app/internal/models"
+	"github.com/newmohib/go-lang-bookings-app/internal/render"
 )
 
 // TemplateData holds data sent from handlers to templates
