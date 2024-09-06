@@ -7,31 +7,55 @@
   <div class="row justify-content-center align-items-center mt-3">
     <h1 class="text-center">Make Reservation</h1>
   </div>
+  <!-- needs-validation -->
+  <form action="/make-reservation" method="post" class="g-3" novalidate>
+    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
 
-  <form
-    action="make-reservation.html"
-    method="post"
-    class="needs-validation"
-    novalidate
-  >
     <div class="mb-3">
       <label for="firstName" class="form-label">First Name:</label>
-      <input name="firstName" type="text" class="form-control" id="firstName" />
+      <input name="firstName" type="text" class="form-control
+      {{with .Form.Errors.Get "first_name"}} is-invalid {{ end }}"
+      id="firstName" />
+      {{with .Form.Errors.Get "first_name"}}
+      <div class="text-danger">{{.}}</div>
+
+      {{ end }}
     </div>
     <div class="mb-3">
       <label for="lastName" class="form-label">Last Name:</label>
-      <input name="lastName" type="text" class="form-control" id="lastName" />
+      <input
+        name="lastName"
+        type="text"
+        class="form-control"
+        id="lastName"
+        required
+      />
+      <div class="invalid-feedback">Please provide a valid Last Name.</div>
     </div>
     <div class="mb-3">
       <label for="email" class="form-label">Email:</label>
-      <input name="email" type="email" class="form-control" id="email" />
+      <input
+        name="email"
+        type="email"
+        class="form-control"
+        id="email"
+        required
+      />
     </div>
+    <div class="invalid-feedback">Please provide a valid Eamil.</div>
     <div class="mb-3">
       <label for="phone" class="form-label">Phone:</label>
-      <input name="phone" type="phone" class="form-control" id="phone" />
+      <input
+        name="phone"
+        type="phone"
+        class="form-control"
+        id="phone"
+        required
+      />
+      <div class="invalid-feedback">Please provide a valid Phone Number.</div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Make Reservation</button>
+    <button class="btn btn-primary" type="submit">Make Reservation</button>
   </form>
 </div>
 

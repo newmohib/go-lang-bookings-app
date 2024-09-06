@@ -7,21 +7,10 @@ import (
 	"net/http"
 
 	"github.com/newmohib/go-lang-bookings-app/internal/config"
+	"github.com/newmohib/go-lang-bookings-app/internal/forms"
 	"github.com/newmohib/go-lang-bookings-app/internal/models"
 	"github.com/newmohib/go-lang-bookings-app/internal/render"
 )
-
-// TemplateData holds data sent from handlers to templates
-type TemplateData struct {
-	StringMap map[string]string
-	IntMap    map[string]int
-	FloatMap  map[string]float32
-	Data      map[string]interface{}
-	CSRFToken string
-	Flash     string
-	Warning   string
-	Error     string
-}
 
 // Repo is the repository used by the handlers
 var Repo *Repository
@@ -71,7 +60,41 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+		Form: forms.New(nil),
+	})
+}
+
+// PostReservation handles the posting of a reservation form
+func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	reservation := models.Reservation{
+		FirstName: r.Form.Get("first_name"),
+		LastName:  r.Form.Get("last_name"),
+		Email:     r.Form.Get("email"),
+		Phone:     r.Form.Get("phone"),
+	}
+
+	form := forms.New(r.PostForm)
+
+	form.Has("first_name", r)
+
+	if !form.Valid() {
+		data := make(map[string]interface{})
+		data["reservation"] = reservation
+
+		render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+			Form: form,
+			Data: data,
+		})
+		return
+	}
+
 }
 
 func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
