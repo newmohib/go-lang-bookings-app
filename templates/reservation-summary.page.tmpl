@@ -1,0 +1,33 @@
+{{template "base" .}}
+
+{{define "content"}}
+
+<div class="container">
+  <div class="row">
+    <div class="coll">
+      <h1>Reservation Summary</h1>
+      <hr>
+      <!-- Content crate for a table -->
+       <table class="table table-striped" >
+         <thead>
+           <tr>
+             <th scope="col">Name</th>
+             <th scope="col">Arrival:</th>
+             <th scope="col">Departure</th>
+             <th scope="col">Email</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td>{{.Reservation.FirstName}}</td>
+             <td>{{.Reservation.LastName}}</td>
+             <td>{{.Reservation.Email}}</td>
+             <td>{{.Reservation.Phone}}</td>
+           </tr>
+         </tbody>
+       </table>
+    </div>
+  </div>
+</div>
+
+{{ end }}
