@@ -86,13 +86,12 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		Email:     r.Form.Get("email"),
 		Phone:     r.Form.Get("phone"),
 	}
-
+	// custom validator
 	form := forms.New(r.PostForm)
-
-	form.Has("firstName", r)
-	form.Has("lastName", r)
-	form.Has("email", r)
-	form.Has("phone", r)
+	form.Required("firstName", "lastName", "email")
+	form.MinLength("firstName", 3)
+	// usign go validator
+	form.IsEmail("email")
 
 	if !form.Valid() {
 		data := make(map[string]interface{})
