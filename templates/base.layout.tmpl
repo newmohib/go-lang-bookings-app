@@ -195,7 +195,6 @@
           text: message,
         });
       };
-      // notify("Success Message");
 
       // sweet alert for notify modal
       const notifyModal = (title, text, icon, confirmButtonText) => {
@@ -206,6 +205,7 @@
           confirmButtonText: confirmButtonText,
         });
       };
+
       // notifyModal(
       //   "Title",
       //   "Do you want to continue",
@@ -390,6 +390,25 @@
         });
       };
     </script>
+
+    {{ with .Error }}
+    <script>
+      notify("{{.}}", "error");
+    </script>
+    {{ end }}
+
+    {{ with .Flash }}
+    <script>
+      notify("{{.}}", "success");
+    </script>
+    {{ end }}
+
+    {{ with .Warning }}
+    <script>
+      notify("{{.}}", "warning");
+    </script>
+    {{ end }}
+
   </body>
 </html>
 
