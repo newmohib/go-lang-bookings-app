@@ -39,3 +39,7 @@ This is the repository for my bookings and reservations project.
     1: An authentications system
     2: Somewhere to store information (database)
     3: A means of sending notifications (email/text)
+
+### another template which one is better another template
+
+    https://github.com/CloudyKit/jet
