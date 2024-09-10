@@ -43,3 +43,6 @@ This is the repository for my bookings and reservations project.
 ### another template which one is better another template
 
     https://github.com/CloudyKit/jet
+
+### Test coverage view as html into browser
+    go test -coverprofile=coverage.out && go tool cover -html=coverage.out

@@ -6,7 +6,6 @@ import (
 	"testing"
 )
 
-
 func TestNoSurve(t *testing.T) {
 	var myH myHandler
 
@@ -24,7 +23,6 @@ func TestNoSurve(t *testing.T) {
 	// }))
 }
 
-
 func TestSessionLoad(t *testing.T) {
 	var myH myHandler
 
@@ -36,8 +34,4 @@ func TestSessionLoad(t *testing.T) {
 	default:
 		t.Error([]byte(fmt.Sprintf("Type is not http.Handler, but is %T", v)))
 	}
-
-	// h := NoSurf(http.AllowQuerySemicolons.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	// 	fmt.Fprintln(w, "Hello from middleware")
-	// }))
 }
