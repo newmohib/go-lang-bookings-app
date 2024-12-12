@@ -22,9 +22,8 @@ var session *scs.SessionManager
 var pathToTemplates = "./../../templates"
 var functions = template.FuncMap{}
 
-
 // run is the main application and it can we will use for testing
-func getRoutes() error {
+func getRoutes() http.Handler {
 
 	// what am i going to put in the session
 	gob.Register(models.Reservation{})
@@ -43,7 +42,7 @@ func getRoutes() error {
 	app.Session = session
 
 	// get the template cache from the carate app config
-	tc, err := render.CreateTemplateCache()
+	tc, err := CreateTestTemplateCache()
 
 	if err != nil {
 		fmt.Println("error parsing template:", err)
@@ -65,7 +64,7 @@ func getRoutes() error {
 	// middleware is used for logging console
 	mux.Use(WriteToConsole)
 	// set coockie into request as csrf on client
-	mux.Use(NoSurf)
+	// mux.Use(NoSurf)
 	// set session
 	mux.Use(SessionLoad)
 
@@ -89,11 +88,9 @@ func getRoutes() error {
 	// fmt.Println("File Server path: ", fileServer)
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
 
-	return nil
+	return mux
 
 }
-
-
 
 func WriteToConsole(next http.Handler) http.Handler {
 
